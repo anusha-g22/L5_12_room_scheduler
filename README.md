@@ -1,51 +1,198 @@
 # Lab 5: Static Code Analysis — Conference Room & Equipment Scheduler
 
-**Your file:** `scheduler_system.py`
+## Overview
 
-Follow the lab handout for the full instructions.
+This project focuses on identifying and fixing code quality, style, reliability, and security issues using static code analysis tools.
 
-## About the program
+The application is a Python-based Conference Room and Equipment Scheduler. It books meeting rooms for specific time slots, allocates equipment, detects scheduling conflicts, logs double bookings, and exports the schedule to a JSON file.
 
-A meeting-room scheduler. It books rooms for time slots, allocates equipment such as projectors and webcams, logs double bookings and exports the schedule to `schedule.json`.
+The program initially contained several code quality and security issues. Pylint, Flake8, and Bandit were used to analyze the source code, identify potential problems, and verify improvements after fixing them.
 
-The code works, but only just. It has quality, style and security problems of the kind Pylint, Flake8 and Bandit are built to find.
+## Objectives
 
-## What to do
+- Understand the purpose of static code analysis.
+- Identify programming errors and code quality issues.
+- Detect security risks using automated analysis tools.
+- Improve code readability, maintainability, and reliability.
+- Fix identified issues without breaking the program's functionality.
+- Generate reports and document the issues and their solutions.
 
-1. **Run it first** and read the output carefully:
-   ```bash
-   python scheduler_system.py
-   ```
-   It asks one question. Press Enter to use the default, then try a few inputs of your own. Not every problem in this file is something a tool will flag, so pay attention to output that looks wrong.
+## Technologies and Tools
 
-2. **Install the tools:**
-   ```bash
-   pip install pylint bandit flake8
-   ```
+- **Python** — Programming language.
+- **Pylint** — Checks code quality, programming practices, naming conventions, and potential errors.
+- **Flake8** — Checks Python style and reports common code issues.
+- **Bandit** — Scans Python code for potential security vulnerabilities.
+- **JSON** — Stores the exported room schedule.
+- **Git and GitHub** — Version control and source code hosting.
 
-3. **Run the analysis** and save the reports:
-   ```bash
-   pylint scheduler_system.py > pylint_report.txt
-   bandit -r scheduler_system.py > bandit_report.txt
-   flake8 scheduler_system.py > flake8_report.txt
-   ```
+## Project Structure
 
-4. **Document the issues** in `issues.md` using this table (at least 4 rows, high and medium severity first):
+```text
+L5_12_room_scheduler/
+│
+├── scheduler_system.py
+├── issues.md
+├── reflection.md
+├── pylint_report.txt
+├── flake8_report.txt
+├── bandit_report.txt
+├── schedule.json
+├── conflicts.log
+├── README.md
+└── .gitignore
+```
 
-   | Issue | Type | Line(s) | Description | Fix Approach |
-   |-------|------|---------|-------------|--------------|
-   | ... | ... | ... | ... | ... |
+**Note:** The reports, schedule, and log files are generated or updated during execution. Some files may not exist until the corresponding steps have been completed.
 
-5. **Fix the code.** Fix at least 4 of the issues you documented, then rerun all three tools to confirm they are gone. Repeat until you are satisfied. The program should still do its job when you are done.
+## Application Features
 
-6. **Reflect.** Answer the four reflection questions from the handout in `reflection.md`.
+- Schedule meetings in conference rooms.
+- Allocate equipment, such as projectors and webcams.
+- Detect and log double-booking conflicts.
+- Export the room schedule to `schedule.json`.
+- Record scheduling conflicts in `conflicts.log`.
+
+## Setup and Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/anusha-g22/L5_12_room_scheduler.git
+```
+
+### 2. Navigate to the project directory
+
+```bash
+cd L5_12_room_scheduler
+```
+
+### 3. Create a virtual environment (recommended)
+
+On Windows:
+
+```powershell
+python -m venv venv
+```
+
+Activate it:
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+If PowerShell prevents activation, you can run the Python and analysis commands directly using the appropriate environment interpreter.
+
+### 4. Install the required tools
+
+```bash
+python -m pip install pylint bandit flake8
+```
+
+## Running the Application
+
+Run the scheduler:
+
+```bash
+python scheduler_system.py
+```
+
+Follow the prompt displayed by the program. Press Enter to use the default input, or enter your own value to test different scenarios.
+
+Check the program output for scheduling results, equipment allocation, and conflict messages.
+
+## Static Code Analysis
+
+Run the following commands from the project directory.
+
+### 1. Pylint
+
+```bash
+pylint scheduler_system.py > pylint_report.txt
+```
+
+Pylint evaluates code quality, naming conventions, documentation, programming practices, and potential errors.
+
+### 2. Flake8
+
+```bash
+flake8 scheduler_system.py > flake8_report.txt
+```
+
+Flake8 checks Python style and reports violations of common style conventions and other code issues.
+
+### 3. Bandit
+
+```bash
+bandit -r scheduler_system.py > bandit_report.txt
+```
+
+Bandit scans Python source code for potential security issues.
+
+**Note:** Redirecting output to a file saves standard output. Some tools may also print messages to standard error, and their exit codes may indicate findings even when the analysis ran successfully.
+
+## Issues Identified and Fixes
+
+The initial source code was analyzed using Pylint, Flake8, and Bandit.
+
+Issues investigated during the lab included:
+
+- Missing module and function documentation.
+- Missing final newline.
+- Use of a mutable default argument.
+- Use of the `global` statement.
+- Inconsistent naming conventions.
+- Unsafe shell-command execution for file operations.
+- Missing or insufficient input validation.
+- File encoding and exception-handling concerns.
+
+The relevant findings, line numbers, severity, and proposed solutions are documented in `issues.md`.
+
+The code was then updated to address the selected issues while preserving the scheduler's intended functionality.
+
+## Verification
+
+After modifying the source code, rerun all three tools:
+
+```bash
+pylint scheduler_system.py > pylint_report.txt
+flake8 scheduler_system.py > flake8_report.txt
+bandit -r scheduler_system.py > bandit_report.txt
+```
+
+Run the application again:
+
+```bash
+python scheduler_system.py
+```
+
+Review the reports and test the program to verify that the changes have not broken its functionality.
+
+The target for this lab is a Pylint score above **9.5/10**.
+
+The final Pylint score and remaining findings should be taken from the actual analysis reports rather than assumed in advance.
 
 ## Deliverables
 
-1. `scheduler_system.py`: your cleaned version, with at least 4 issues fixed.
-2. `issues.md`: the completed issue table.
-3. `reflection.md`: your answers to the reflection questions.
+| File | Description |
+|---|---|
+| `scheduler_system.py` | Updated scheduler implementation with corrected issues. |
+| `issues.md` | Table documenting identified issues, severity, affected lines, descriptions, and fixes. |
+| `reflection.md` | Answers to the four reflection questions provided in the lab handout. |
+| `pylint_report.txt` | Pylint analysis report. |
+| `flake8_report.txt` | Flake8 analysis report. |
+| `bandit_report.txt` | Bandit security analysis report. |
 
-**Target:** aim for a Pylint score above 9.5 on your final file. A perfect 10.00/10 is very good.
+## Learning Outcomes
 
-Be ready to explain the bugs you found and how you fixed them. You may be called on to present.
+Through this lab, I learned how static analysis tools help identify problems before software is deployed.
+
+I also learned the importance of readable code, meaningful documentation, safe file handling, appropriate input validation, and automated code-quality checks.
+
+Static analysis complements program execution and testing: it can identify potential issues without running the program, but it does not guarantee that every functional bug or security vulnerability has been found.
+
+## Repository
+
+GitHub repository:
+
+https://github.com/anusha-g22/L5_12_room_scheduler
